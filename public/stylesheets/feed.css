@@ -1,0 +1,76 @@
+
+body{
+	background-color: rgb(197, 192, 192);
+}
+
+.container
+{
+  padding-top: 13vh;
+  width: 1400px;
+  margin: auto;
+  columns: 6;
+  column-gap: 20px;
+  
+}
+.container .box
+{
+  width: 100%;
+  margin-bottom: 10px;
+  break-inside: avoid;
+  border-radius: 15px;
+}
+.container .box img
+{
+  max-width: 100%;
+  min-width: 100%;
+  border-radius: 10px;
+}
+
+
+img:hover {
+  
+  opacity: .95;
+  box-shadow: 0 0 10px #fff;
+}
+
+.caption{
+	color: #040404;
+	font-family: Arial, Helvetica, sans-serif;
+	padding: 2px;
+}
+
+@media (max-width: 1427px)
+{
+  .container
+  {
+    columns: 5;
+    width: calc(100% - 40px);
+  }
+}
+@media (max-width: 1200px)
+{
+  .container
+  {
+    columns: 4;
+  }
+}
+
+@media (max-width: 1000px)
+{
+  .container
+  {
+    columns: 3;
+  }
+   
+  body{
+		overflow-x: hidden;
+	}
+}
+
+@media (max-width: 480px)
+{
+  .container
+  {
+    columns: 1;
+  }
+}

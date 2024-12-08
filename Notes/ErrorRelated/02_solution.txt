@@ -3,4 +3,4 @@ Cannot set headers after they are sent to the client, indicates that your
 Express application is trying to send a response to the client after it has already sent a response. 
 This typically happens when you attempt to call res.send(), res.json(), or similar methods multiple times for the same request
 
-==> i have used res.send() two times in a route,thats why got error
+==> i have used res.send() two times in a route,thats why got this error

@@ -1,0 +1,51 @@
+* first , I make two model(collection) in database -- install mongoose,then connect it to local mongodb compass
+ 1.userModel (to store user info)
+ 2.postmodel - to store post info
+
+*for authentication -- passport passport-local passport-local-mongoose
+module is used ,did setup in app.js, and use functionality in index.js
+* we have to add(require,setup) express session in code so that we can use passport session
+
+==> var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+
+const expressSession= require('express-session')
+const passport = require('passport');
+
+ app.use(expressSession({  // here we add express session in code so that we can use passport session
+  resave:false,
+  secret:'radhe radhe',
+  saveUninitialized:false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session()); //we are using session of passport here
+passport.serializeUser(usersRouter.serializeUser());
+==> passport.deserializeUser(usersRouter.deserializeUser());
+
+
+
+to show any error that occured in login/register(username/password incorrect..etc) , when login,register fn. gives error, we can access those error in flash
+=> connect-flash is used to access error of login/register
+install connect-flash module, and do setup in app.jsx
+now, use flash in login,register route(post)
+to show error in login,register page(get) -- send req.flash("error") while rendering the page
+
+
+now, making profile page dynamic according to the user --
+first we have to find user details then we will show that in profile page
+
+** IMPORTANT : when a user is logged in in any website, in the session(storage in server side) -- user all detail is stored as object , since we are using passport for login/register , so we will request session.passport.user
+since, if anyone is tring to go to profile page, he must be logged in( bcoz profile is protected route --must satisfy isLoggedIn fn)
+so,when user is login, they can open profile page, and session will store user info after login till logout
+here, we can access session value in profile route by ___
+      req.session.passport.user
+ we want to access whole document of that user which was stored in usermodel at time of login/register
+
+ so ---- router.get('/profile', isLoggedIn ,async function(req,res,next){
+    const user = await userModel.findOne({
+        username:req.session.passport.user
+    })
+    res.render("profile" , {user}); //we get document of user which is stored in database in user variable (IMPORTANT : req.session.passport.user return user (ie. if i am using this web ,i will get my userinfo, if dev is using this web, he will get his userdata) )
+});     
+

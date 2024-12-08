@@ -1,0 +1,51 @@
+If someone copy these codes, then also , this website will not run bcoz we need to install packages that are used such as - mongoose,multer,uuid,passport,passport-local,passport-local-mongoose .. etc
+
+If one is downloading folder from github--- it may create problem bcoz maybe express will not support ,or it could support ..
+if express is supporting then , he  have to install all these dependencies --
+
+ "dependencies": {
+    "connect-flash": "^0.1.1",  ✅
+    "cookie-parser": "~1.4.4", 
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "express-session": "^1.18.1", ✅
+    "http-errors": "~1.6.3",
+    "mongoose": "^8.8.3", ✅
+    "morgan": "~1.9.1",
+    "multer": "^1.4.5-lts.1", ✅
+    "passport": "^0.7.0", ✅
+    "passport-local": "^1.0.0",✅
+    "passport-local-mongoose": "^8.0.0",✅
+    "uuid": "^11.0.3"✅
+  }
+
+i have install nodemon globally in this pc , so to run code ---
+npx nodemon
+
+if someone has not install they can use ----
+ {
+  "name": "pinterest",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"  ✅-- this word "start" will be written to the terminal as -- npm run start 
+  },
+  "dependencies": {
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "express-session": "^1.18.1",
+    "http-errors": "~1.6.3",
+    "mongoose": "^8.8.3",
+    "morgan": "~1.9.1",
+    "multer": "^1.4.5-lts.1",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^8.0.0",
+    "uuid": "^11.0.3"
+  }
+}
+

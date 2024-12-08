@@ -1,0 +1,15 @@
+node:_http_outgoing:652
+    throw new ERR_HTTP_HEADERS_SENT('set');
+          ^
+
+Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+    at ServerResponse.setHeader (node:_http_outgoing:652:11)
+    at ServerResponse.header (C:\Users\Aman\Desktop\pinterest\node_modules\express\lib\response.js:767:10)
+    at ServerResponse.send (C:\Users\Aman\Desktop\pinterest\node_modules\express\lib\response.js:170:12)
+    at C:\Users\Aman\Desktop\pinterest\routes\index.js:134:9
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  code: 'ERR_HTTP_HEADERS_SENT'
+}
+
+Node.js v20.10.0
+PS C:\Users\Aman\Desktop\pinterest>

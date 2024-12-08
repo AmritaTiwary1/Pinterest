@@ -1,22 +1,33 @@
 body {
   height: calc(100vh - 50px);
   letter-spacing: .1px;
-  display: flex;
+  flex-direction: column;
   margin-top: 20px;
   /* align-items: center; */
-  justify-content: center;
   background: #EEEEEE;
 }
+.containerbox {
+    display: flex;
+    justify-content: center;
+}
 
-#card {
-  width: 650px;
-  height: 200px;
+.flex{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: start;
+}
+
+#cardbox {
+  width: 80vh;
+  height: 250px;
   margin: 0;
   padding: 15px;
   display: flex;
+  /* align-items: center; */
   flex-direction: row;
-  align-items:center;
-  background: #FFFFFF;
+  background: #fdeeee;
+  /* justify-content: center; */
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
@@ -39,16 +50,16 @@ body {
 #name {
   font-size: 24px;
   font-weight: 800;
-  margin: 3px;
+  margin: 1;
   padding: 0;
 }
 
-#text {
+.text {
   color: #999999;
   font-size: 18px;
   font-weight: 600;
   letter-spacing: .3px;
-  margin: 5px;
+  margin: 1px;
   padding: 0;
 }
 
@@ -57,9 +68,10 @@ body {
   font-size: 20px;
   font-weight: 600;
   text-align: center;
-  width: calc(100% - 20px);
+  align-items: center;
+  width: calc(80% - 20px);
   margin-top: 20px;
-  padding: 10px;
+  padding: 10px ;
   background: #0501f6;
   border-radius: 8px;
   cursor: pointer;

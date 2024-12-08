@@ -134,3 +134,10 @@
     opacity: 0.4;
     margin-left: 25%;
   }
+
+  .error{
+    font-weight: 500;
+    color:red;
+    text-transform: capitalize;
+    margin-top: 12px;
+  }

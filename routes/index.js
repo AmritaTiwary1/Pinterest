@@ -1,5 +1,5 @@
 const express= require('express');
-const router = express.Router();
+const router = express.Router(); 
 
 const passport = require('passport');
 const localStrategy = require('passport-local');
@@ -7,16 +7,24 @@ const userModel = require('./users');
 const postModel=require('./posts');
 passport.use(new localStrategy(userModel.authenticate()));
 
+const upload = require('./multer'); //importing upload variable from multer.js file
+
 router.get('/',function(req,res){
     res.send("home page");
 });
 
-router.get('/profile', isLoggedIn ,function(req,res,next){
-    res.render("profile");
+router.get('/profile', isLoggedIn ,async function(req,res,next){
+    const user = await userModel.findOne({
+        username:req.session.passport.user
+    }).populate('posts');  //here, in user variable, we are populating posts field which contain postsid so that the doc of postId will be accessible from user variable 
+    res.render("profile" , {user}); //we get document of user which is stored in database in user variable (IMPORTANT : req.session.passport.user return user (ie. if i am using this web ,i will get my userinfo, if dev is using this web, he will get his userdata) )
 });
 
 router.get('/login',function(req,res){
-    res.render('login');
+  //console.log(req.flash("error"))  ; //here, we can access flash message bcoz in route=/login(method=post) , we have write failureFlash:true , so we can access error message in failureredirect's route('/login') by writing- console.log(req.flash("error")) 
+ //but if user go to login page for first time,then flash error will not be visible,bcoz there is no error at that time
+
+  res.render('login', {error: req.flash("error") });  //sending flash message to login page , so that user can see the error , flash message is array
 })
 
 router.get('/feed',function(req,res){
@@ -26,6 +34,7 @@ router.get('/feed',function(req,res){
 router.get('/register',function(req,res){
     res.render('register');
 })
+
 
 /*
 router.get('/createuser', async function(req,res){
@@ -85,7 +94,9 @@ router.post('/register', function(req,res){
 
 router.post('/login', passport.authenticate("local",{
      successRedirect:'/profile',
-    failureRedirect:'/login'
+    failureRedirect:'/login',
+    failureFlash:true  //to use flash message, I install connect-flash module and did setup in app.js to use it
+    //if user input wrong info, this failureFlash:true will allow failureRedirect route(ie. /login) to access flash message, which hold error("username, password wrong") 
 }) , function(req,res){ } );
 
 router.get('/logout',function(req,res){
@@ -93,9 +104,38 @@ router.get('/logout',function(req,res){
     if(err){
         return next(err);
     }
-    res.redirect('/');
+    res.redirect('/'); 
    });
 });
+
+router.post('/upload', isLoggedIn , upload.single("file") ,async function(req,res,next){  // here in upload.single("file"), 
+// file is the name of the input field in which we r uploading image --check profile.ejs - in form of uploading image  - 
+//<input type="file" name="file"> is written , if we write name="anything" then we have to write upload.single("anything")  
+   
+if(!req.file){  //if user dont upload image, we'll show error 
+     return res.status(404).send("no files were given");
+   }
+   
+   //adding post details/id to user document ,so first we have to find the user(req.session.passport.user),
+   // then have to add post id in post array of user doc. and also, we have to create a doc in postmodel in which user id,uploaded image,and its caption will be passed
+    
+   const user =await userModel.findOne({username: req.session.passport.user});
+  
+   const post =await postModel.create({ // once user upload image,caption , then i will run the fn create so that a doc. in postmodel will be created
+      postText: req.body.fileCaption,
+      image: req.file.filename,  //note : req.file is written instead of req.body bcoz req.file will return new file detail and req.file.filename return new filename (which is stored in uploads folder in public folder )
+      user:user._id
+    });
+
+    /* await*/ user.posts.push(post._id); // await keyword will not be use at the time of pushing,in saving we use... In usermodel, we are pushing post id to posts field in user document , 
+    await user.save();
+    res.redirect('/profile');
+    
+}); //we have to save the uploaded file 
+
+
+ 
+
 
 function isLoggedIn(req,res,next){
     if(req.isAuthenticated()){

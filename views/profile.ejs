@@ -31,7 +31,7 @@
      <div class="cards flex">
        <% user.posts.forEach( function(post){ %>
         <div class="card" style="width: 18rem;">
-          <img src='/images/uploads/<%= post.image %>' class="card-img-top" alt="image">  <!-- here,we dont write /public/images/uploads bcoz in app.js , we already add ./public so no need to write in linking css,scripts,img -->
+          <img height="auto" width="150px"  src='/images/uploads/<%= post.image %>' class="card-img-top" alt="image">  <!-- here,we dont write /public/images/uploads bcoz in app.js , we already add ./public so no need to write in linking css,scripts,img -->
           <div class="card-body">
             <h5 class="card-title"><%= post.postText %></h5>
         </div>  

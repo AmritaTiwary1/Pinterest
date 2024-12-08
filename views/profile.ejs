@@ -1,22 +1,43 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Profile</title>
-    <link rel="stylesheet" href="/stylesheets/profile.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link rel="stylesheet" href="/stylesheets/profile.css">  
 </head>
-<body>
-    <div id="card">
-        <img id="avatar" src="https://images.unsplash.com/photo-1483909796554-bb0051ab60ad?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z2lybCUyMHByb2ZpbGV8ZW58MHx8MHx8fDA%3D" alt="avatar" />
+  <body>
+<div class="containerbox">
+    <div id="cardbox">
+
+        <img id="avatar" src="https://images.pexels.com/photos/4442088/pexels-photo-4442088.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load" alt="avatar" />
         <div id="info">
-          <p id="name">Julia Stone</p> <!-- fullname -->
-          <p id="text">julia@</p>  <!--  username -->
-          <p id="tagline">Happiness is the Goal of life</p>   <!-- tagline -->
-          <p id="description">Working as Software Engineer</p>  <!-- description -->
+          <p id="name"><%= user.fullname %></p> <!-- fullname , user variable is accessible bcoz it is sent through profile route --> 
+          <p class="text"><%= user.username %></p>  <!--  username -->
+          <p class="tagline text">Happiness is the Goal of life</p>   <!-- tagline -->
+          <p class="description text">Working as Software Engineer</p>  <!-- description -->
           
-        <a href="/feed"><p id="btn">View Profile</p></a>
+        <a href="/logout"><p id="btn">Logout</p></a>
+        <form action="/upload" method="post" enctype="multipart/form-data">   
+           <input type="text" name="fileCaption" placeholder="Post Caption" >
+           <input type="file" name="file">
+            <button type="submit">upload</button> 
+        </form>
         </div>
       </div>
-</body>
+    </div>
+      
+<div class="container d-flex p-23px">
+     <div class="cards flex">
+       <% user.posts.forEach( function(post){ %>
+        <div class="card" style="width: 18rem;">
+          <img src='/images/uploads/<%= post.image %>' class="card-img-top" alt="image">  <!-- here,we dont write /public/images/uploads bcoz in app.js , we already add ./public so no need to write in linking css,scripts,img -->
+          <div class="card-body">
+            <h5 class="card-title"><%= post.postText %></h5>
+        </div>  
+      <% }) %>
+     </div>
+    </div>  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
 </html>

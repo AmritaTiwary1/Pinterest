@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/pinterest');
 
- const passport = require('passport');
+const passport = require('passport');
 const plm = require('passport-local-mongoose');
 
 

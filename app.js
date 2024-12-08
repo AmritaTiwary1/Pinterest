@@ -9,6 +9,7 @@ var usersRouter = require('./routes/users');
 var postsRouter = require('./routes/posts');
 
 const expressSession=require('express-session');
+const flash = require('connect-flash');
 const passport = require('passport');
 
 var app = express();
@@ -17,11 +18,14 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(flash()); //i got error here, bcoz i haven't write app.use('flash()') / app.use('flash'), instead app.use(flash()) :ERROR - throw new TypeError('app.use() requires a middleware function')  
+
 app.use(expressSession({
   secret:"radhe",
   saveUninitialized:false, 
   resave:false
 }));
+
 
 app.use(passport.initialize());
 app.use(passport.session());

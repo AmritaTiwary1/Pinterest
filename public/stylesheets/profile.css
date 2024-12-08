@@ -17,6 +17,12 @@ body {
   gap: 20px;
   align-items: start;
 }
+.cards{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: start;
+}
 
 #cardbox {
   width: 80vh;
@@ -58,7 +64,7 @@ body {
   color: #999999;
   font-size: 18px;
   font-weight: 600;
-  letter-spacing: .3px;
+  letter-spacing: .11px;
   margin: 1px;
   padding: 0;
 }
